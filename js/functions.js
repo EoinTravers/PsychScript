@@ -85,6 +85,7 @@ function end_experiment() {
 	document.getElementById('debrief').style.display = "Inline";
 };
 
+/*//The end user should have access to there fuctions, so they're defined in main.js
 function trial_stage0(trial_number) {
 	stimuli_number = random_order[trial_number]
 	probe = probes[stimuli_number];
@@ -105,7 +106,7 @@ function trial_stage2() {
 	show_text(probe);
 	get_key()
 };
-
+*/ 
 function log_response() {
 	document.getElementById('timeBox').value = Date();
 	document.getElementById('trialBox').value = trial_number;
