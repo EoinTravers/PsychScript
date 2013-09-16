@@ -146,16 +146,18 @@ function sendData(address){ // POSTs data in responseForm to the address given.
 };
 		
 // Other functions
-function shuffle(o){ //Shuffle an array
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
+function shuffle(array){ //Shuffle an array
+    //+ Jonas Raoni Soares Silva
+    //@ http://jsfromhell.com/array/shuffle [v1.0]
+    for(var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], o[i] = array[j], array[j] = x);
+    return array;
 };
 
 function range(start, end) { // Creates range of numbers from start to end (similar to Python)
-    var foo = [];
+    var ar = [];
     for (var i = start; i <= end; i++) {
-        foo.push(i);
+        ar.push(i);
     }
-    return foo;
+    return ar;
 };
 
