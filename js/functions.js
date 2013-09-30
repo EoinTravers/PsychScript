@@ -153,7 +153,7 @@ function shuffle(o){ //Shuffle an array
 
 function range(start, end) { // Creates range of numbers from start to end (similar to Python)
     var foo = [];
-    for (var i = start; i <= end; i++) {
+    for (var i = start; i <= end-1; i++) {
         foo.push(i);
     }
     return foo;

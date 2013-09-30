@@ -41,19 +41,20 @@
 				 to a page where they can find more information.
 			</p>	
 		</div>
-		
-		<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
-			<!--<input id = "timeBox"  type = "hidden" name = "timeOut"><!--Hidden response data-->
-			<br>Timestamp: <input id = "timeBox"    name = "timestamp"><br>
-			Trial <input id = "trialBox"    name = "trial"><br>
-			Stimuli<input id = "stimuliBox"    name = "stimuli"><br>
-			Probe<input id = "probeBox"    name = "probe"><br>
-			Response<input id = "responseBox"    name = "response"><br>
-			rt<input id = "rtBox"    name = "rt"><br><!--Shown response data-->
-		</form>
+		<div id="hidden_div" style = "Display: None;">
+			<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
+				<!--<input id = "timeBox"  type = "hidden" name = "timeOut"><!--Hidden response data-->
+				<br>Timestamp: <input id = "timeBox"    name = "timestamp"><br>
+				Trial <input id = "trialBox"    name = "trial"><br>
+				Stimuli<input id = "stimuliBox"    name = "stimuli"><br>
+				Probe<input id = "probeBox"    name = "probe"><br>
+				Response<input id = "responseBox"    name = "response"><br>
+				rt<input id = "rtBox"    name = "rt"><br><!--Shown response data-->
+			</form>
+		</div>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="js/main.js"></script>
 		<script src="js/functions.js"></script>
+		<script src="js/lexical_decision_keyboard_response.js"></script>
 	</body>
 
 </html>
