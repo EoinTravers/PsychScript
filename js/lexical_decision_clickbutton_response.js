@@ -4,37 +4,36 @@
 
 // Settings you can vary
 var ITI = 500 // Inter Trial Interval
-var data_address = 'save_data.php' // Page to send results to
-// Settings
-var random_order = shuffle(range(0, questions.length));
+var number_of_trials = 40
+var data_address = 'save_data.php' // Page to send results to.
+var logging_box_ids = new Array('timeBox', 'trialBox', 'probeBox', 'codeBox', 'responseBox', 'rtBox');
+var variables_to_log = new Array('date', 'trial_number', 'probe', 'code', 'response', 'rt');
+var debug_mode = true // Set as true to show extra information, false to run experiment normally.
+
+// Do not change
+var random_order = generate_random_list(40);
 var trial_number = 0;
 var stim_number = random_order[trial_number];
 
-// Experiment logic
+// Experiment logic - Adjust this as needed
+if(debug_mode){
+    document.getElementById('hidden_div').style.display = 'Inline'
+};
+
 function trial_stage0() {
-	stim_number = random_order[trial_number];
-	base_category = base_categories[stim_number];
-	target_category = target_categories[stim_number];
-	type_img = types[stim_number]
-	probe = questions[stim_number];
-	trial_stage1(ITI);
+    deactivate_response_buttons(['yesButton', 'noButton']);
+    stim_number = random_order[trial_number];
+    probe = probes[stim_number];
+    code = codes[stim_number];
+    show_fixation(ITI);
+    setTimeout("trial_stage1()", ITI);
 };
 
-function trial_stage1(duration) {
-	console.log('Trial number: ' + String(trial_number) + '; Stimuli number: ' + String(stim_number));
-	var pause = duration / 3
-	show_text('+');
-	setTimeout("trial_stage2()", duration);
+function trial_stage1() {
+    start_time = (Date.now());
+    show_text(probe);
+    activate_response_buttons(['yesButton', 'noButton']);
 };
-
-function trial_stage2() {
-	start_time = (Date.now());
-	show_text(probe);
-	show_image('img1', base_category);
-	show_image('img2', type_img);
-	show_image('img3', target_category);
-	activate_response_buttons();
-	};
 
 /*
     This page is part of PsychScript

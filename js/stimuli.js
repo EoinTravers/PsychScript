@@ -18,4 +18,4 @@ codes = [
 	'pseudo_word', 'pseudo_word', 'pseudo_word', 'pseudo_word', 'pseudo_word',
 	'consonants', 'consonants', 'consonants', 'consonants', 'consonants',
 	'consonants', 'consonants', 'consonants', 'consonants', 'consonants'
-	;]
+	];

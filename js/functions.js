@@ -25,20 +25,16 @@
 
 // Don't change anything below this line.
 // Trial variables
-var keys_pressed = [];
 var trial_number = 0;
 var stimuli_number;
-var random_order = shuffle(range(0, probes.length-1)); 
-
-// Running variables
+// Running variables - Defined here so the user doesn't have to deal with them.
 var start_time;
 var response;
 var rt;
+var prime;
 var probe;
-// Variables to save
-var responses = [];
-var accuracies = [];
-var reaction_times = [];
+var accepted_keys
+
 
 // Functions
 // Visuals
@@ -51,26 +47,69 @@ function show_above(text) {
 function show_below(text) {
 	document.getElementById('textBelowProbe').innerHTML = text;
 };
-
-// Response handling
-document.addEventListener("keydown", process_keypress, false);
-function process_keypress(e) {
-	var keyCode = e.keyCode;
-	keys_pressed.push(String.fromCharCode(keyCode))
+function show_image(locationID, src) {
+	var this_image = document.getElementById(locationID)
+	this_image.src = '../images/' + src;
+	this_image.style.display = 'Block';
+};
+function hide_images(){
+	document.getElementById('img1').style.display = 'None';
+	document.getElementById('img2').style.display = 'None';
+	document.getElementById('img3').style.display = 'None';
+};
+function show_fixation(duration, flash) {
+    flash = flash || false
+    if (flash) {
+    	var pause = duration / 3
+	show_text('')
+	setTimeout("show_text('+');", pause)
+	setTimeout("show_text('');", pause*2)
+    }
+    else {
+	show_text('+');
+    };
 };
 
-function get_key(){ // TODO: Accept only certain keys.
-	if (keys_pressed.length == 0) {
-		setTimeout("get_key();", 5)
+// Response handling
+function get_keyboard_response(keys_to_accept) {
+    accepted_keys = keys_to_accept
+    document.onkeydown = function(event) {
+	var key = String.fromCharCode(event.keyCode)
+	if(accepted_keys == undefined) {
+	    response = key
+	    log_response()
 	}
 	else {
-		var key = keys_pressed[0]
-		console.log(keys_pressed[0]);
-		keys_pressed = [];
-		response = key; // Important: var response must be declared beforehand!
-		rt = ((Date.now()) - start_time);
-		log_response();
+	    var key
+	    if (accepted_keys.indexOf(key) != -1) {
+		response = key
+		log_response()
+	    }
+	    else if (accepted_keys.indexOf(key.toLowerCase()) != -1) {
+		// In case acccepted_keys were given in lowercase.
+		response = key
+		log_response()
+	    };
 	};
+    };
+};
+
+function activate_response_buttons(list_of_button_ids) {
+    for (var i=0; i < list_of_button_ids.length; i++)  {
+	var button = document.getElementById(list_of_button_ids[i]);
+	console.log(i+button)
+	button.onclick = function(){
+	    response = this.innerHTML
+	    log_response(response);
+	};
+    };
+};
+
+function deactivate_response_buttons(list_of_button_ids) {
+    for (var i=0; i < list_of_button_ids.length; i++)  {
+	var button_id = list_of_button_ids[i]
+	document.getElementById(button_id).onclick = function(){};
+    };
 };
 
 // Experiment logic
@@ -85,64 +124,42 @@ function end_experiment() {
 	document.getElementById('debrief').style.display = "Inline";
 };
 
-/*//The end user should have access to there fuctions, so they're defined in main.js
-function trial_stage0(trial_number) {
-	stimuli_number = random_order[trial_number]
-	probe = probes[stimuli_number];
-	trial_stage1(ITI);
-};
+// Logging
 
-function trial_stage1(duration) {
-	var pause = duration / 3
-	show_text('');
-	setTimeout("show_text('+')", pause);
-	setTimeout("show_text('')", (pause*2));
-	setTimeout("trial_stage2()", duration);
-};
-
-function trial_stage2() {
-	keys_pressed = [];
-	start_time = (Date.now());
-	show_text(probe);
-	get_key()
-};
-*/ 
-function log_response() {
-	document.getElementById('timeBox').value = Date();
-	document.getElementById('trialBox').value = trial_number;
-	document.getElementById('stimuliBox').value = stimuli_number;
-	document.getElementById('probeBox').value = probe;
-	document.getElementById('responseBox').value = response;
-	document.getElementById('rtBox').value = rt;
-	//sendData(data_address);
-	next_trial();
+function log_response(response) {
+    console.log('Logging response: '+ response)
+    rt = Date.now() - start_time;
+    for (var i=0; i < variables_to_log.length; i++) {
+	var logging_box_id = logging_box_ids[i];
+	var variable_to_log = variables_to_log[i];
+	console.log(logging_box_id)
+	document.getElementById(logging_box_id).value = window[variable_to_log]
+    };
+    //sendData(data_address);
+    next_trial();
 };
 
 function next_trial(){
-	//log_data();
-	if (trial_number < probes.length-1) {
-		trial_number++
-		console.log('trial_number')
-		console.log(trial_number)
-		trial_stage0(trial_number)
-	}
-	else {
-		//end()
-		end_experiment();
-	};
+    if (trial_number < probes.length-1) {
+	trial_number++
+	trial_stage0(trial_number)
+    }
+    else {
+	end_experiment();
+    };
 };
 
 function sendData(address){ // POSTs data in responseForm to the address given.
-	$.ajax({
-		type: "POST",
-		//url: "save_data.php",
-		url: address,
-		data: $("#responseForm").serialize(), // serializes the form's elements.
-		success: function(data)
-		{
-		   console.log('data sent')
-		}
-	});
+    $.ajax({
+	    type: "POST",
+	    //url: "save_data.php",
+	    url: address,
+	    data: $("#responseForm").serialize(), // serializes the form's elements.
+	    success: function(data)
+	    {
+	       console.log('data sent')
+	    }
+    });
 };
 		
 // Other functions
@@ -159,3 +176,21 @@ function range(start, end) { // Creates range of numbers from start to end (simi
     return foo;
 };
 
+function generate_random_list(length){
+    return shuffle(range(0, length));
+};
+
+if (!Array.prototype.indexOf) { // Compatibility fix for IE. See http://stackoverflow.com/questions/143847/best-way-to-find-an-item-in-a-javascript-array#144172
+    Array.prototype.indexOf = function (obj, fromIndex) {
+        if (fromIndex == null) {
+            fromIndex = 0;
+        } else if (fromIndex < 0) {
+            fromIndex = Math.max(0, this.length + fromIndex);
+        }
+        for (var i = fromIndex, j = this.length; i < j; i++) {
+            if (this[i] === obj)
+                return i;
+        }
+        return -1;
+    };
+}

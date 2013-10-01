@@ -3,34 +3,36 @@
 */
 
 // Settings you can vary
-//Stimuli
-var probes = ['one', 'two', 'three', 'four'];
-var correct_responses = ['Y', 'N', 'Y', 'N'];
-
-// Settings
-var ITI = 1500 // Inter Trial Interval
+var ITI = 500 // Inter Trial Interval
+var number_of_trials = 40
 var data_address = 'save_data.php' // Page to send results to.
+var logging_box_ids = new Array('timeBox', 'trialBox', 'probeBox', 'codeBox', 'responseBox', 'rtBox');
+var variables_to_log = new Array('date', 'trial_number', 'probe', 'code', 'response', 'rt');
+var debug_mode = true // Set as true to show extra information, false to run experiment normally.
 
-// Experiment logic
-function trial_stage0(trial_number) {
-	stimuli_number = random_order[trial_number]
-	probe = probes[stimuli_number];
-	trial_stage1(ITI);
+// Do not change
+var random_order = generate_random_list(40);
+var trial_number = 0;
+var stim_number = random_order[trial_number];
+
+
+// Experiment logic - Adjust this as needed
+if(debug_mode){
+    document.getElementById('hidden_div').style.display = 'Inline'
 };
 
-function trial_stage1(duration) {
-	var pause = duration / 3
-	show_text('');
-	setTimeout("show_text('+')", pause);
-	setTimeout("show_text('')", (pause*2));
-	setTimeout("trial_stage2()", duration);
+function trial_stage0() {
+    stim_number = random_order[trial_number];
+    probe = probes[stim_number];
+    code = codes[stim_number];
+    show_fixation(ITI);
+    setTimeout("trial_stage1()", ITI);
 };
 
-function trial_stage2() {
-	keys_pressed = [];
-	start_time = (Date.now());
-	show_text(probe);
-	get_key() // Waits for keypress, records response, accuracy and rt, logs response, proceeds to next trial.
+function trial_stage1() {
+    start_time = (Date.now());
+    show_text(probe);
+    get_keyboard_response('YN');
 };
 
 /*
