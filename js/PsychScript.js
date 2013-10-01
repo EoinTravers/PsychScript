@@ -163,25 +163,17 @@ function sendData(address){ // POSTs data in responseForm to the address given.
 };
 		
 // Other functions
-function shuffle(array){ //Shuffle an array
-    //+ Jonas Raoni Soares Silva
-    //@ http://jsfromhell.com/array/shuffle [v1.0]
-    for(var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], o[i] = array[j], array[j] = x);
-    return array;
+function shuffle(o){ //Shuffle an array
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
 };
 
 function range(start, end) { // Creates range of numbers from start to end (similar to Python)
-<<<<<<< HEAD
-    var ar = [];
-    for (var i = start; i <= end; i++) {
-        ar.push(i);
-=======
     var foo = [];
     for (var i = start; i <= end-1; i++) {
         foo.push(i);
->>>>>>> mouse-tracking
     }
-    return ar;
+    return foo;
 };
 
 function generate_random_list(length){

@@ -12,11 +12,17 @@
 		<!-- This section is where all the stimuli will be presented during the experiment. -->
 		<div id='experiment' align = "center" ;
 		style="display: None; margin-right:100px; margin-left:100px; margin-top:100px;">
-			<p id = 'textAboveProbe'>Top text.</p>
+			<p id = 'textAboveProbe'>Is this a word?</p>
 			<div id = 'probeHolder' style="width:60%;  min-height:100px; padding-top:100px; padding-bottom:100px; border: 2px solid">
 				<p id = 'probeText' style="font-size:30px; font-weight:bold;">Hello</p> <!--This doesn't behave as it should for long text-->
 			</div>
-			<p id = 'textBelowProbe'>Bottom text.</p>
+			<p id = 'textBelowProbe'>
+
+			</p>
+			<p id = 'responseButtons'>
+				<button id="yesButton">Yes</button>
+				<button id="noButton">No</button>
+			</p>
 		</div>
 		
 		<!-- Instructions here are shown prior to begining the experiment. -->
@@ -42,21 +48,39 @@
 			</p>	
 		</div>
 		
-		<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
-			<!--<input id = "timeBox"  type = "hidden" name = "timeOut"><!--Hidden response data-->
-			<br>Timestamp: <input id = "timeBox"    name = "timestamp"><br>
-			Trial <input id = "trialBox"    name = "trial"><br>
-			Stimuli<input id = "stimuliBox"    name = "stimuli"><br>
-			Probe<input id = "probeBox"    name = "probe"><br>
-			Response<input id = "responseBox"    name = "response"><br>
-			rt<input id = "rtBox"    name = "rt"><br><!--Shown response data-->
-		</form>
+		<div id="hidden_div" style = "Display: None;">
+		<!-- 
+		Nothing within this section will be visable to participants.
+		Note the 'id' and 'name' values for each <input> below.
+		In your JavaScript file, you will need to include a  list of these ids, along with
+		a list of the corresponding variable for each;
+		i.e. 
+			var logging_box_ids = [Date(), trial_number, probe, code, response, rt]
+			var variables_to_log = ['timeBox', 'trialBox', 'probeBox', 'codeBox', 
+						'responseBox', 'rtBox']
+						
+		The 'name' value is the name this variable gets sent to the server as.
+		It is recomended that you use the same names as used for the variables in the experiment itself,
+		and, when it comes to creating your database, using 
+		 -->
+			<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
+				Timestamp: <input id = "timeBox"    name = "timestamp"><br>
+				Trial <input id = "trialBox"    name = "trial"><br>
+				Probe<input id = "probeBox"    name = "probe"><br>
+				Code<input id = "codeBox"    name = "code"><br>
+				Response<input id = "responseBox"    name = "response"><br>
+				rt<input id = "rtBox"    name = "rt"><br><!--Shown response data-->
+			</form>
+			<button onclick=" document.getElementById('hidden_div').style.display = 'None';">Hide</button>
+		</div>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="js/stimuli.js"></script>
 		<script src="js/functions.js"></script>
+		<script src="js/lexical_decision_clickbutton_response.js"></script>
 	</body>
 
 </html>
+
 <!--
     This page is part of PsychScript
     Copyright (C) 2013 Eoin Travers etravers01@qub.ac.uk.
