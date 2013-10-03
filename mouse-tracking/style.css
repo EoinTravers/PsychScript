@@ -1,0 +1,18 @@
+.outerContainer {
+    display: block;
+    width: 100px; /* width of parent */
+    height: 100px; /* height of parent */
+    overflow: hidden;
+}
+.outerContainer .innerContainer {
+    display: block;
+    vertical-align: middle;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+li {
+    background: white;
+    width: 100px;
+    height: 100px;
+}

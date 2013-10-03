@@ -8,7 +8,7 @@
 	<body onload="trial_stage0();">
 	    <p align = "center" style="font-size:10pt; font-weight:bold;">Press F11 to quit</p>
 	    <p align = "center">
-		<canvas align = "center" id="canvas1" style="border: 1px solid black;">
+		<canvas align = "center" id="canvas" style="border: 1px solid black;">
 		It looks like your browser doesn't support this feature, sorry!
 		</canvas>  
 	    </p>
@@ -27,7 +27,7 @@
 	    </div>
 		
 
-	    <div id="hiddenDiv" style = "Display:None">
+	    <div id="hiddenDiv" style = "Display:Block">
 		    <div id="monitoring" style="display: inline;">
 			<h2 id="x" >
 			0
@@ -43,27 +43,19 @@
 		    </div>
 	    <!-- Some hidden input boxes, for data to be written to, and sent at the end of the experiment.-->
 		<form id = "responseForm" name ="Output" method ="POST" action ="save_data.php">
-		    <!--<input id = "timeBox"  type = "hidden" name = "timeOut">
-		    <input id = "trialBox"  type = "hidden" name = "trialOut">
-		    <input id = "nBox"  type = "hidden" name = "nOut">
-		    <input id = "responseBox"  type = "hidden" name = "responseOut">
-		    <input id = "rtBox"  type = "hidden" name = "rtOut">
-		    <input id = "widthBox"  type = "hidden" name = "widthOut">
-		    <input id = "heightBox"  type = "hidden" name = "heightOut">
-		    <input id = "xBox"  type = "hidden" name = "xOut">
-		    <input id = "yBox"  type = "hidden" name = "yOut">
-		    <input id = "tBox"  type = "hidden" name = "tOut"><!--Hidden response data-->
-		    Timestamp: <input id = "timeBox"    name = "timeOut"><br>
-		    Trial <input id = "subjectBox"    name = "subjectOut"><br>
-		    Trial <input id = "trialBox"    name = "trialOut"><br>
-		    Stimuli(n)<input id = "nBox"    name = "nOut">(identity of target, responses, and their relationhships can be inferred from this).<br>
-		    Response<input id = "responseBox"    name = "responseOut"><br>
-		    rt<input id = "rtBox"    name = "rtOut"><br>
-		    canvas width<input id = "widthBox"    name = "widthOut"><br>
-		    canvas height<input id = "heightBox"    name = "heightOut"><br>
-		    x trajectory<input id = "xBox"    name = "xOut"><br>
-		    y trajectory<input id = "yBox"    name = "yOut"><br>
-		    timepoints<input id = "tBox"    name = "tOut"><br>
+		    Experiment start time: <input id = "timeBox" name = "timeOut"><br>
+		    Subject number: <input id = "subjectBox" name = "subjectOut"><br>
+		    Probe: <input id = "probeBox" name = "probeOut"><br>
+		    Code: <input id = "codeBox" name = "codeOut"><br>
+		    Response: <input id = "responseBox" name = "responseOut"><br>
+		    RT: <input id = "rtBox" name = "rtOut"><br>
+		    x: <input id = "xBox" name = "xOut"><br>
+		    y: <input id = "yBox" name = "yOut"><br>
+		    t: <input id = "tBox" name = "tOut"><br>
+		    trial_number: <input id = "trialBox" name = "trialOut"><br>
+		    stimuli_number: <input id = "stimuliBox" name = "stimuliOut"><br>
+		    canvas_width: <input id = "widthBox" name = "widthOut"><br>
+		    canvas_height: <input id = "heightBox" name = "heightOut"><br>
 		</form>	
 		<div>
 		    <p id = 'python_output'>
@@ -73,6 +65,7 @@
 	</body>
 <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script src="js/functions.js"></script>
+<script src="js/mousetracking_functions.js"></script>
 <script src="js/stimuli.js"></script>
 <script src="js/main.js"></script>
 </html>
