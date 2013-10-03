@@ -19,3 +19,6 @@ codes = [
 	'consonants', 'consonants', 'consonants', 'consonants', 'consonants',
 	'consonants', 'consonants', 'consonants', 'consonants', 'consonants'
 	];
+
+var buttons = new Array('yes.png', 'no.png', 'start.png', 'next.png');
+var button_imgs = preload_images(buttons, 'images/')

@@ -33,8 +33,8 @@ var response;
 var rt;
 var prime;
 var probe;
-var accepted_keys
-
+var accepted_keys;
+var feedback_delay;
 
 // Functions
 // Visuals
@@ -127,9 +127,13 @@ function end_experiment() {
 
 
 // Logging
-function check_accuracy(condition, response, conditions, correct_responses) {
-    var condition_index = conditions.indexOf(condition);
-    var correct_response = correct_responses[condition_index]
+function check_accuracy() {
+    var codes_index = list_of_codes.indexOf(code);
+    var correct_response = correct_responses[codes_index]
+    console.log('Correct')
+    console.log(correct_response)
+    console.log('Given')
+    console.log(response)
     if (response == correct_response) {
 	return true
     }
@@ -143,15 +147,28 @@ function log_response() {
     // If they exit, clear intervals and timeouts.
     try {clearInterval(tracking_interval);} catch(err){};
     try {clearTimeout(response_timeout);} catch(err){};
+    feedback_delay = 0
+    if(error_feedback) {
+	var correct = check_accuracy()
+	console.log(correct)
+	if (!correct) {
+	    give_feedback()
+	};
+    };
     console.log('Logging response: '+ response)
     for (var i=0; i < variables_to_log.length; i++) {
 	var logging_box_id = logging_box_ids[i];
 	var variable_to_log = variables_to_log[i];
-	console.log(variable_to_log)
 	document.getElementById(logging_box_id).value = window[variable_to_log]
     };
-    //sendData(data_address);
-    next_trial();
+    sendData(data_address);
+    setTimeout(function(){next_trial();}, feedback_delay)
+};
+
+function give_feedback() {
+    console.log('Error: Blank feedback used')
+    // This is the default function, which does nothing.
+    // Override this to give feedback
 };
 
 function next_trial(){

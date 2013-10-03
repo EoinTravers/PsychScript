@@ -9,6 +9,11 @@ var data_address = 'save_data.php' // Page to send results to.
 var logging_box_ids = new Array('timeBox', 'trialBox', 'probeBox', 'codeBox', 'responseBox', 'rtBox');
 var variables_to_log = new Array('date', 'trial_number', 'probe', 'code', 'response', 'rt');
 var debug_mode = true // Set as true to show extra information, false to run experiment normally.
+var error_feedback = true
+// If using error_feedback, you need to define the possible codes, and 
+// the correct response for each.
+var codes = new Array('common_word', 'rare_word','pseudo_word', 'consonants');
+var correct_responses = new Array(1, 1, 2, 2);
 
 // Do not change
 var random_order = generate_random_list(40);
