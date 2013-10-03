@@ -1,9 +1,11 @@
 // Experiment stuff
 // Parameters
 var sample_rate = 10;
+var fixation_length = 1500;
 var max_init_time = 800;
 var max_response_time = 4000;
-var early_start_msg = "Whoah, not so fast!\nPlease don't start moving until you see the final word.";
+
+var early_start_msg = "Whoah, not so fast!\nPlease don't start moving until you see the word.";
 var late_start_msg = "Good, but remember, you're under time pressure.\n\nPlease try to start moving as soon\
  as you see the final word, even if you're not fully sure of your answer yet.";
 var timeout_msg = "Oh no! You ran out of time!\n\nPlease try to answer more quickly.";
@@ -13,6 +15,7 @@ var data_address = 'save_data.php'
 var error_feedback = true
 // If using error_feedback, you need to define the possible codes, and 
 // the correct response for each.
+var error_pause = 700;
 var list_of_codes = new Array('common_word', 'rare_word','pseudo_word', 'consonants');
 var correct_responses = new Array(1, 1, 2, 2);
 
@@ -123,10 +126,12 @@ function trial_stage0() {
 
 function trial_stage1(){
 	button.image.src = 'images/start.png'
-	draw_me = Array(resp1, resp2, prime_text, button);
+	draw_me = Array(resp1, resp2, button);
 	// Set the button to, when clicked, show a fixation for 1500ms, then
 	// run trial stage 2.
-	button.action = function(){mousetrack_fixation(trial_stage2, 1500)}
+	next_function = trial_stage2
+	//button.action = function(){mousetrack_fixation('trial_stage2', 1500)}
+	button.action = function(){mousetrack_fixation(fixation_length, trial_stage1, trial_stage2);}
 	update_screen();
 	// Nothing will now happen until the button is clicked.
 };

@@ -1,3 +1,6 @@
+// Some important variables we want to keep away from end users
+var homeInterval
+
 // Setup Functions
 function preload_images(image_names, directory) {
 	var image_array = new Array();
@@ -161,7 +164,7 @@ function give_feedback() {
     // Mousetracking specific feedback: no.png if wrong.
     draw_me = Array(resp1, resp2, feedback);
     update_screen();
-    feedback_delay = 1000;
+    feedback_delay = error_pause;
 };
 
 function python_debug() {
@@ -170,10 +173,10 @@ function python_debug() {
     document.getElementById('py_t').innerHTML = tList;
 };
 
-function mousetrack_fixation(next_function, duration) {
+function mousetrack_fixation(duration, previous_function, next_function) {
 	/* Flashes a fixation cross on and off for duration ms, and
 	 * then executes next_function (usually the mouse tracking phase).*/
-	var pause = duration / 3
+	var pause = fixation_length / 3
 	prime_text.text = '';
 	draw_me = Array(resp1, resp2, prime_text);
 	update_screen();
@@ -186,19 +189,23 @@ function mousetrack_fixation(next_function, duration) {
 		update_screen();
 		}, pause*2);
 	timer3 = setTimeout(function(){
-		clearInterval(homeInterval);
-		next_function()}, duration);
-	homeInterval = setInterval(function(){check_home(next_function, duration)}, 50);
+		//clearInterval(homeInterval);
+		next_function()}, fixation_length);
+	homeInterval = setInterval(function(){check_home(previous_function)}, 50);
 };
 
-function check_home(next_function, duration){
+//function check_home(next_function, duration){
+function check_home(previous_function){
+	// Raises and alert, and goes back to 'previous_function' uf
+	// the mouse has left the button
 	if(button.contains(mx, my) == false){
 		// Stop the scheduled stimuli
-		clearInterval(homeInterval);
+		//
 		clearTimeout(timer1);
 		clearTimeout(timer2);
 		clearTimeout(timer3);
 		alert(early_start_msg);
-		mousetrack_fixation(next_function, duration);
+		clearInterval(homeInterval);
+		previous_function();
 	};
 };
