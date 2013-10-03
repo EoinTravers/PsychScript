@@ -80,15 +80,17 @@ function get_keyboard_response(keys_to_accept) {
 	    log_response()
 	}
 	else {
-	    var key
+	    var key //= String.fromCharCode(event.keyCode)
 	    if (accepted_keys.indexOf(key) != -1) {
 		response = key
 		log_response()
+		//return response
 	    }
 	    else if (accepted_keys.indexOf(key.toLowerCase()) != -1) {
 		// In case acccepted_keys were given in lowercase.
 		response = key
 		log_response()
+		//return response
 	    };
 	};
     };
