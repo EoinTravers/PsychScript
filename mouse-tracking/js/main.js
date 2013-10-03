@@ -8,6 +8,14 @@ var late_start_msg = "Good, but remember, you're under time pressure.\n\nPlease 
  as you see the final word, even if you're not fully sure of your answer yet.";
 var timeout_msg = "Oh no! You ran out of time!\n\nPlease try to answer more quickly.";
 var number_of_trials = probes.length
+var data_address = 'save_data.php'
+
+var error_feedback = true
+// If using error_feedback, you need to define the possible codes, and 
+// the correct response for each.
+var list_of_codes = new Array('common_word', 'rare_word','pseudo_word', 'consonants');
+var correct_responses = new Array(1, 1, 2, 2);
+
 
 // Variables to record
 var experiment_start_time = Date();

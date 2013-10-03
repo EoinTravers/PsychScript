@@ -157,6 +157,13 @@ function check_if_late(maximum_init_time) {
 	return button.contains(xList[time_to_check], yList[time_to_check])
 };
 
+function give_feedback() {
+    // Mousetracking specific feedback: no.png if wrong.
+    draw_me = Array(resp1, resp2, feedback);
+    update_screen();
+    feedback_delay = 1000;
+};
+
 function python_debug() {
     document.getElementById('py_x').innerHTML = xList;
     document.getElementById('py_y').innerHTML = yList;
@@ -195,21 +202,3 @@ function check_home(next_function, duration){
 		mousetrack_fixation(next_function, duration);
 	};
 };
-
-//~ var ctx
-//~ // Create the canvas
-//~ function set_up_canvas(w, h)  {
-	//~ // Caution: This will return a canvas object, but not the context.
-	//~ // Use as follows:
-	//~ //	var canvas = set_up_canvas(200, 150);
-	//~ //	var ctx = canvas.getContext("2d");
-	//~ var canvas = document.getElementById('canvas1')
-	//~ canvas.style.marginLeft = "auto";
-	//~ canvas.style.marginRight = "auto";
-	//~ canvas.style.display = "Block";
-	//~ canvas.width = w;
-	//~ canvas.height = h;
-	//~ //canvas.offsetLeft = window.innerWidth *.25; // is this right?
-	//~ ctx = canvas.getContext("2d");
-	//~ return(canvas)
-//~ };
