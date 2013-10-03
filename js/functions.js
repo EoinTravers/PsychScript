@@ -112,6 +112,7 @@ function deactivate_response_buttons(list_of_button_ids) {
     };
 };
 
+
 // Experiment logic
 function begin_experiment() {
 	document.getElementById('instructions').style.display = "None";
@@ -124,15 +125,29 @@ function end_experiment() {
 	document.getElementById('debrief').style.display = "Inline";
 };
 
-// Logging
 
-function log_response(response) {
-    console.log('Logging response: '+ response)
+// Logging
+function check_accuracy(condition, response, conditions, correct_responses) {
+    var condition_index = conditions.indexOf(condition);
+    var correct_response = correct_responses[condition_index]
+    if (response == correct_response) {
+	return true
+    }
+    else {
+	return false
+    };
+};
+
+function log_response() {
     rt = Date.now() - start_time;
+    // If they exit, clear intervals and timeouts.
+    try {clearInterval(tracking_interval);} catch(err){};
+    try {clearTimeout(response_timeout);} catch(err){};
+    console.log('Logging response: '+ response)
     for (var i=0; i < variables_to_log.length; i++) {
 	var logging_box_id = logging_box_ids[i];
 	var variable_to_log = variables_to_log[i];
-	console.log(logging_box_id)
+	console.log(variable_to_log)
 	document.getElementById(logging_box_id).value = window[variable_to_log]
     };
     //sendData(data_address);
@@ -166,21 +181,15 @@ function sendData(address){ // POSTs data in responseForm to the address given.
 function shuffle(array){ //Shuffle an array
     //+ Jonas Raoni Soares Silva
     //@ http://jsfromhell.com/array/shuffle [v1.0]
-    for(var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], o[i] = array[j], array[j] = x);
+    for(var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
     return array;
 };
 
 function range(start, end) { // Creates range of numbers from start to end (similar to Python)
-<<<<<<< HEAD
     var ar = [];
-    for (var i = start; i <= end; i++) {
+    for (var i = start; i < end; i++) {
         ar.push(i);
-=======
-    var foo = [];
-    for (var i = start; i <= end-1; i++) {
-        foo.push(i);
->>>>>>> mouse-tracking
-    }
+    };
     return ar;
 };
 
@@ -202,3 +211,5 @@ if (!Array.prototype.indexOf) { // Compatibility fix for IE. See http://stackove
         return -1;
     };
 }
+
+

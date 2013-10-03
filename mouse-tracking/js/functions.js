@@ -57,7 +57,6 @@ function hide_images(){
 	document.getElementById('img2').style.display = 'None';
 	document.getElementById('img3').style.display = 'None';
 };
-
 function show_fixation(duration, flash) {
     flash = flash || false
     if (flash) {
@@ -70,7 +69,6 @@ function show_fixation(duration, flash) {
 	show_text('+');
     };
 };
-
 
 // Response handling
 function get_keyboard_response(keys_to_accept) {
