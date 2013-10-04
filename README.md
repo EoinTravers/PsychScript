@@ -38,6 +38,14 @@ var response = get_keyboard_response('abc');
 A definite improvement!
 
 
+---------------------
+
+###Demos
+To see some of PsychScript in action, check out the following demos:
+ - [Keyboard Response](http://www3.qub.ac.uk/researchingreasoning/psychscript/keyboard_response/)
+ - [Click Response](http://www3.qub.ac.uk/researchingreasoning/psychscript/click_response/)
+ - [Mouse-tracking](http://www3.qub.ac.uk/researchingreasoning/psychscript/mouse_tracking/)
+
 
 ---------------------
 
