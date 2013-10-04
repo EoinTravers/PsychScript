@@ -102,7 +102,7 @@ function activate_response_buttons(list_of_button_ids) {
 	console.log(i+button)
 	button.onclick = function(){
 	    response = this.innerHTML
-	    log_response(response);
+	    log_response();
 	};
     };
 };
@@ -231,4 +231,13 @@ if (!Array.prototype.indexOf) { // Compatibility fix for IE. See http://stackove
     };
 }
 
+function preload_images(image_names, directory) {
+	var image_array = new Array();
+	for (var i = 0; i < image_names.length; i++) {
+		var img = new Image()
+		img.src = directory + image_names[i]
+		image_array.push(img)
+	};
+	return image_array;
+};
 

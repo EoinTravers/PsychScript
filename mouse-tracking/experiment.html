@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <title>PsychScript - Mouse-tracking</title>
+	    <link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+	    <p align = "center" style="font-size:10pt; font-weight:bold;">Press F11 to quit</p>
+	    <p align = "center">
+		<canvas align = "center" id="canvas" style="border: 1px solid black;">
+		It looks like your browser doesn't support this feature, sorry!
+		</canvas>  
+	    </p>
+	    
+	    <div id="endText" align = "left"  style = "font-size:30px; display: none; margin-left:100px;
+	    margin-right:100px;">
+		<p>
+		    Thanks for your time!<br>
+		    I've asked you to take part in this pilot for two reasons. The first is to make sure that the mouse tracking software I've written will actually work before I use it with the undergraduates. The second, more interesting reason is to see if an old fashioned inhibitory control measure, the Hayling task, can be updated with the mouse tracking method.<br>
+		    In the original version of this task, designed for neurologists as a measure of inhibitory control in patients, participants were simply asked to say either a word which was appropriate to finish the sentence, or instead give one which didn't make any sense in the context. Because the second task requires inhibition of the meaning of the previous sentence, patients with frontal lobe damage struggled with it, relative to controls. However, previous attempts to adapt this kind of 'semantic inhibition' task (as supposed to lower level kinds of inhibition, like the Stroop task) have found relatively little variance in the accuracy and reaction times of healthy participants. Hopefully, the mouse movement data from this study will provide a more accurate measure of individuals' level of 'semantic inhibitory control'.<br>
+		</p>
+		<p>
+		    Thanks!<br>
+		    Eoin
+		</p>
+	    </div>
+		
+
+	    <div id="hiddenDiv" style = "Display:Block">
+		    <div id="monitoring" style="display: inline;">
+			<h2 id="x" >
+			0
+			</h2>
+			<h2 id="y" >
+			0
+			</h2>
+			<h2 id = "md" style = "visibility:hidden"></h2>
+			<h2 id="responseFeedback" type = "hidden"></h2>
+			<h2 id="xMonitor" type = "hidden"></h2>
+			<h2 id="yMonitor" type = "hidden"></h2>
+			<h2 id="tMonitor" type = "hidden"></h2>
+		    </div>
+	    <!-- Some hidden input boxes, for data to be written to, and sent at the end of the experiment.-->
+		<form id = "responseForm" name ="Output" method ="POST" action ="save_data.php">
+		    Experiment start time: <input id = "timeBox" name = "timeOut"><br>
+		    Subject number: <input id = "subjectBox" name = "subjectOut"><br>
+		    Probe: <input id = "probeBox" name = "probeOut"><br>
+		    Code: <input id = "codeBox" name = "codeOut"><br>
+		    Response: <input id = "responseBox" name = "responseOut"><br>
+		    RT: <input id = "rtBox" name = "rtOut"><br>
+		    x: <input id = "xBox" name = "xOut"><br>
+		    y: <input id = "yBox" name = "yOut"><br>
+		    t: <input id = "tBox" name = "tOut"><br>
+		    trial_number: <input id = "trialBox" name = "trialOut"><br>
+		    stimuli_number: <input id = "stimuliBox" name = "stimuliOut"><br>
+		    canvas_width: <input id = "widthBox" name = "widthOut"><br>
+		    canvas_height: <input id = "heightBox" name = "heightOut"><br>
+		</form>	
+		<div>
+		    <p id = 'python_output'>
+		    </p>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="../js/functions.js"></script>
+	<script src="js/mousetracking_functions.js"></script>
+	<script src="../js/stimuli.js"></script>
+	<script src="js/main.js"></script>
+	
+	</body>
+
+</html>

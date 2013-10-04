@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Mouse tracking template</title>
+		<link rel="stylesheet" type="text/css" href="../style.css">
+	</head>
+	<body align = "center">
+
+		<h2>Study title</h2>
+		<!-- This section is where all the stimuli will be presented during the experiment. -->
+		<div id='experiment' align = "center" ;
+		style="display: None; margin-right:100px; margin-left:100px; margin-top:100px;">
+			<p id = 'textAboveProbe'>Is this a word?</p>
+			<div id = 'probeHolder' style="width:60%;  min-height:100px; padding-top:100px; padding-bottom:100px; border: 2px solid">
+				<p id = 'probeText' style="font-size:30px; font-weight:bold;">Hello</p> <!--This doesn't behave as it should for long text-->
+			</div>
+			<p id = 'textBelowProbe'>
+				Buttons:<br>
+				Y : Is a word<br>
+				N : Not a word.
+			</p>
+		</div>
+		
+		<!-- Instructions here are shown prior to begining the experiment. -->
+		<div id="instructions" align = "center" ;
+		style="display:Inline; margin-right:100px; margin-left:100px; margin-top:100px;">
+			<p>
+				Use this space to write instructions.<br>
+				You can use any HTML formatting you like in here.<br>
+				This section will be hidden when the participant clicks 'Begin'.
+			</p>
+			<p>
+				<button onclick="begin_experiment();">Begin</button>
+			</p>		
+		</div>
+		
+		<!-- This section appears after the last trial. -->
+		<div id="debrief" align = "center" ;
+		style="display:None; margin-right:100px; margin-left:100px; margin-top:100px;">
+			<p>
+				This section will appear once the experiment is finished.<br>
+				Use it to explain what your study was about, or post a link
+				 to a page where they can find more information.
+			</p>	
+		</div>
+		
+		<div id="hidden_div" style = "Display: None;">
+		<!-- 
+		Nothing within this section will be visable to participants.
+		Note the 'id' and 'name' values for each <input> below.
+		In your JavaScript file, you will need to include a  list of these ids, along with
+		a list of the corresponding variable for each;
+		i.e. 
+			var logging_box_ids = [Date(), trial_number, probe, code, response, rt]
+			var variables_to_log = ['timeBox', 'trialBox', 'probeBox', 'codeBox', 
+						'responseBox', 'rtBox']
+						
+		The 'name' value is the name this variable gets sent to the server as.
+		It is recomended that you use the same names as used for the variables in the experiment itself,
+		and, when it comes to creating your database, using 
+		 -->
+			<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
+				Paradigm: <input id = "paradigmBox"    name = "paradigm"><br>
+				Timestamp: <input id = "timeBox"    name = "timestamp"><br>
+				Subject: <input id = "subjectBox"    name = "subject"><br>
+				Trial <input id = "trialBox"    name = "trial"><br>
+				Stimuli <input id = "stimuliBox"    name = "trial"><br>
+				Probe<input id = "probeBox"    name = "probe"><br>
+				Code<input id = "codeBox"    name = "code"><br>
+				Response<input id = "responseBox"    name = "response"><br>
+				rt<input id = "rtBox"    name = "rt"><br><!--Shown response data-->
+			</form>
+			<button onclick=" document.getElementById('hidden_div').style.display = 'None';">Hide</button>
+		</div>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="../js/functions.js"></script>
+		<script src="../js/stimuli.js"></script>
+		<script src="../js/lexical_decision_keyboard_response.js"></script>
+	</body>
+
+</html>
+
+<!--
+    This page is part of PsychScript
+    Copyright (C) 2013 Eoin Travers etravers01@qub.ac.uk.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->

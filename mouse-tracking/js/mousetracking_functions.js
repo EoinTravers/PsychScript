@@ -2,15 +2,7 @@
 var homeInterval
 
 // Setup Functions
-function preload_images(image_names, directory) {
-	var image_array = new Array();
-	for (var i = 0; i < image_names.length; i++) {
-		var img = new Image()
-		img.src = directory + image_names[i]
-		image_array.push(img)
-	};
-	return image_array;
-};
+
 
 
 // Canvas functions and classes

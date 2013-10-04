@@ -1,5 +1,9 @@
 // Experiment stuff
 // Parameters
+$( window ).load(function() {
+	trial_stage0();
+	});
+
 var sample_rate = 10;
 var fixation_length = 1500;
 var max_init_time = 800;
@@ -16,8 +20,7 @@ var error_feedback = true
 // If using error_feedback, you need to define the possible codes, and 
 // the correct response for each.
 var error_pause = 700;
-var list_of_codes = new Array('common_word', 'rare_word','pseudo_word', 'consonants');
-var correct_responses = new Array(1, 1, 2, 2);
+
 
 
 // Variables to record
@@ -133,6 +136,8 @@ function trial_stage1(){
 	//button.action = function(){mousetrack_fixation('trial_stage2', 1500)}
 	button.action = function(){mousetrack_fixation(fixation_length, trial_stage1, trial_stage2);}
 	update_screen();
+	// Hack
+	button.draw()
 	// Nothing will now happen until the button is clicked.
 };
 
