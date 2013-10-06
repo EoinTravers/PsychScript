@@ -43,7 +43,7 @@ var values = [[1,1], [2,2]]
 function add_me() {
 	alert(one + two)
 };
-var l = new Loop(variables, values, add_me);
+var l = new Loop(variables, values, add_me, 'random');
 
 // Other functions
 function shuffle(array){ //Shuffle an array
