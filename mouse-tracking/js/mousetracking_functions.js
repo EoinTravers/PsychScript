@@ -121,15 +121,25 @@ function pass() {
 
 // Mouse handling
 document.onmousemove = function(e){
-    mx = e.pageX - canvas.offsetLeft
-    my = e.pageY - canvas.offsetTop
-    //$('#x').html(mx); // For debugging - Disable for speed
-	//$('#y').html(my); // For debugging
+    if(e.offsetX) {
+        mx = e.offsetX;
+        my = e.offsetY;
+    }
+    else if(e.layerX) {
+        mx = e.layerX;
+        my = e.layerY;
+    }
 };
 canvas.onmousedown = function(e){
-    mx = e.pageX - canvas.offsetLeft
-    my = e.pageY - canvas.offsetTop
-    //onsole.log(String(mx)+' '+String(my))
+	if(e.offsetX) {
+        mx = e.offsetX;
+        my = e.offsetY;
+    }
+    else if(e.layerX) {
+        mx = e.layerX;
+        my = e.layerY;
+    }
+    //console.log(String(mx)+' '+String(my))
     for(var i = 0; i < clickables.length; i++){
 		if(clickables[i].contains(mx, my)){
 			clickables[i].onclick()
