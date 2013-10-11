@@ -21,8 +21,7 @@
    
 -->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
@@ -32,10 +31,24 @@
 </head>
 
 <body>
+	<p>
+		<button onclick = "var click = new Get_Clickbutton(log_response, ['resp1', 'resp2']); click.run()">Get Click Response</button>
+	</p>
+	<p>
+		<button onclick = "var key = new Get_Key(log_response, 'abc'); key.run() ">Get Keyboard Response ('abc')</button>
+	</p>
+	<p>
+		Responses:
+	</p>
+	<p>
+		<button id='resp1'>One</button>
+		<button id='resp2'>two</button>
+	</p>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
 <script src = "../js/functions.js"></script>
 <script src = "Loop.js"></script>
 <script src = "Sequence.js"></script>
-<script src = "Get_Key.js"></script>
+<script src = "Responses.js"></script>
 </body>
 
 </html>

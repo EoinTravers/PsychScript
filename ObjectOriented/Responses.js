@@ -1,14 +1,13 @@
 function Get_Key(callback, keys_to_accept) {
+	this.callback = callback
+	this.keys_to_accept = keys_to_accept
+};
+
+Get_Key.prototype.run = function(){
 	// Global variables
 	window['start_response_interval'] = Date.now();
-	window['callback'] = callback;
-	window['keys_to_accept'] = keys_to_accept || '';
-	//~ if (window['keys_to_accept'] == undefined) {
-		//~ window['accept_all_keys'] = true;
-	//~ }
-	//~ else {
-		//~ window['accept_all_keys'] = false;
-	//~ };
+	window['callback'] = this.callback;
+	window['keys_to_accept'] = this.keys_to_accept || '';
 	window['response'] = undefined;
 	window.onkeydown = function(event) {
 		// This code will execute when the user presses a key.
@@ -40,28 +39,42 @@ function ignore_keypresses(){
 	window.onkeydown = function(event) {};
 };
 
-function Get_Clickbutton(callback, list_of_button_ids) {
+function Get_Clickbutton(callback, response_button_ids) {	
 	// Make sure button ids are provided. Throw error otherwise.
-	if typeof(list_of_button_ids) == 'undefined' {
+	if (typeof(response_button_ids) == 'undefined') {
 		throw 'PsychScript Error: Get_Clickbutton() called without list ids for response buttons';
 	};
+	this.callback = callback;
+	this.response_button_ids = response_button_ids;
+};
+
+Get_Clickbutton.prototype.run = function(){
 	window['response'] = undefined;
-	window['callback'] = callback;
-    for (var i=0; i < list_of_button_ids.length; i++)  {
-		var button = document.getElementById(list_of_button_ids[i]);
+	window['callback'] = this.callback;
+	window['response_button_ids'] = this.response_button_ids;
+    for (var i=0; i < response_button_ids.length; i++)  {
+		var button = document.getElementById(response_button_ids[i]);
 		button.onclick = function(){
 			var response_time = Date.now() - window['start_response_interval'];
 			window['response_time'] = response_time;
 			window['response'] = this.innerHTML // Set button text as response
+			ignore_clickbuttons();
 			window['callback']() // Executes the next function (i.e. response logging)
 		};
 	};
     window['start_response_interval'] = Date.now(); // Start timer
 };
-	
+
+function ignore_clickbuttons() {
+	var list_of_button_ids = window['response_button_ids'];
+	for (var i=0; i < list_of_button_ids.length; i++)  {
+		var button = document.getElementById(response_button_ids[i]);
+		button.onclick = function(){};
+	};
+};
 
 function log_response() {
 	// Temporary function, for testing
-	alert(String(response) + String(response_time));
+	alert('Response: ' + String(response) +'\nRT: '+ String(response_time));
 };
 
