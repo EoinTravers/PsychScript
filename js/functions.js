@@ -241,3 +241,17 @@ function preload_images(image_names, directory) {
 	return image_array;
 };
 
+function create_logging_form(formID, variables_list) {
+    var form = document.getElementById(formID);
+    for(var i=0; i < variables_list.length; i++){
+	var variable = variables_list[i]
+	var label = document.createTextNode(variable);
+	var inp = document.createElement("input");
+	inp.setAttribute('id', variable+'Box');
+	inp.setAttribute('name', variable+'Out');
+	var line = document.createElement('br');
+	form.appendChild(label);
+	form.appendChild(inp);
+	form.appendChild(line);
+    };
+};
