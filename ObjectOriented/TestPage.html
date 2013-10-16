@@ -32,10 +32,10 @@
 
 <body>
 	<p>
-		<button onclick = "var click = new Get_Clickbutton(log_response, ['resp1', 'resp2']); click.run()">Get Click Response</button>
+		<button onclick = "click.run()">Get Click Response</button>
 	</p>
 	<p>
-		<button onclick = "var key = new Get_Key(log_response, 'abc'); key.run() ">Get Keyboard Response ('abc')</button>
+		<button onclick = "key.run() ">Get Keyboard Response ('abc')</button>
 	</p>
 	<p>
 		Responses:
@@ -44,11 +44,22 @@
 		<button id='resp1'>One</button>
 		<button id='resp2'>two</button>
 	</p>
+	<p>
+		<div>
+			<img id = "probe_image">
+		</div>
+	</p>
+	<p id="probe_text">
+		Foo
+	</p>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<script src="Prototype.js" type="text/javascript"></script>
 <script src = "../js/functions.js"></script>
 <script src = "Loop.js"></script>
 <script src = "Sequence.js"></script>
 <script src = "Responses.js"></script>
+<script src = "Stimuli.js"></script>
+<script src = "with_prototype.js"></script>
 </body>
 
 </html>
