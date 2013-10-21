@@ -24,6 +24,7 @@ var ShowText = Class.create({
 	this.location_id = location_id;
   },
   run: function(message) {
+	  console.log('Show Text')
 	  document.getElementById(this.location_id).innerHTML = this.text;
 	  this.callback.run.bind(this.callback); // bind 'this' to GetClick,
 	  // rather than inheriting from ShowText, as is the default.
@@ -38,6 +39,7 @@ var GetClick = Class.create({
 		this.response_button_ids = response_button_ids;
 	},
 	run: function() {
+		console.log('Get Click')
 		window['response_callback'] = this.callback.run.bind(this.callback);
 		for (var i=0; i < this.response_button_ids.length; i++)  {
 			var button = document.getElementById(this.response_button_ids[i]);
@@ -64,6 +66,7 @@ var GetKey = Class.create({
 		
 	},
 	run: function(){
+		console.log('Get Key')
 		window['accepted_keys'] = this.accepted_keys || '';
 		window.onkeydown = function(event) {
 			// This code will execute when the user presses a key.
@@ -115,6 +118,7 @@ var Logger = Class.create({
 		document.body.appendChild(form);
 	},
 	run: function(){
+		console.log('Log Responses')
 		if(document.getElementById('logging_form') == null) {
 			// No logging form exists, create one
 			this.create_form()
@@ -129,6 +133,53 @@ var Logger = Class.create({
 	}
 });
 
+var Sequence = Class.create({
+	initialize: function(){
+		this.items = new Array();
+	},
+	add_item: function(item){
+		this.items.push(item)
+	},
+	set_callbacks: function(){
+		for(var i = 0; i < this.items.length-1; i++){
+			console.log(i)
+			this.items[i].callback = this.items[i+1];
+			this.items[i].callback.run.bind(this.items[i].callback);	
+		};
+		this.items[this.items.length-1].callback = this.end_sequence();
+	},
+	end_sequence: function(){
+		alert('End of Sequence')
+	},
+	run: function(){
+		this.items[0].run()
+	}
+});
+var ConsoleLog = Class.create({
+	initialize: function(items){
+	},
+	log: function(){
+		var message  = window['message'];
+		console.log(message);
+	}
+});	
+
+text = new ShowText('Click a response!', 'probe_text');
+text2 = new ShowText('Use your keyboard!', 'probe_text');
+key = new GetKey('abc');
+click = new GetClick(response_button_ids);
+logger = new Logger(['response', 'response_time']);
+seq = new Sequence();
+seq.add_item(text);
+seq.add_item(click);
+seq.add_item(logger);
+seq.set_callbacks();
+
+// Set Callbacks
+//~ text.callback = click;
+//~ key.callback = logger;
+//~ text2.callback = key;
+//~ click.callback = logger;
 var start_response_interval
 var response
 var response_time
@@ -143,14 +194,4 @@ var log_response = function(){
 
 
 
-text = new ShowText('Click a response!', 'probe_text');
-text2 = new ShowText('Use your keyboard!', 'probe_text');
-key = new GetKey('abc');
-click = new GetClick(response_button_ids);
-logger = new Logger(['response', 'response_time']);
 
-// Set Callbacks
-text.callback = click;
-key.callback = logger;
-text2.callback = key;
-click.callback = logger;
