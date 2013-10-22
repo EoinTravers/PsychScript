@@ -4,19 +4,21 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Test Page</title>
-
+	<link rel="stylesheet" href="style.css">
 		
 	</head>
 	<body>
-		<p>
-			<div id = 'probe_text'>
-				Probe text
-			</div>
-		</p>
+
 		<p>
 			<div>
 				<button id = 'keyboard_button' onclick = 'text.run();'>Text, then click response</button>
 			</div>
+			<div>
+				<button id = 'keyboard_button' onclick = 'text2.run();'>Text, then keyboard response</button>
+			</div>
+		</p>
+		<p>
+		    <button id = "run_seq" onclick = "seq.run();">Run Sequence</button>
 		</p>
 		<p>
 			<div>
@@ -25,13 +27,15 @@
 			</div>
 		</p>
 		<p>
-			<div>
-				<button id = 'keyboard_button' onclick = 'text2.run();'>Text, then keyboard response</button>
+			<div id = 'probe_text' class="probeText">
+				Probe text
 			</div>
 		</p>
 	
 	</body>
 		<script src="jQuery.js"></script>
+		
+		<script src="../js/functions.js"></script>
 		<script src="Prototype.js"></script>
 		<script src="Responses.js"></script>
 		<script src="Stimuli.js"></script>

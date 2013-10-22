@@ -72,8 +72,8 @@ Get_Clickbutton.prototype.run = function(){
 };
 
 function ignore_clickbuttons() {
-	var list_of_button_ids = window['response_button_ids'];
-	for (var i=0; i < list_of_button_ids.length; i++)  {
+	this.list_of_button_ids = window['response_button_ids'];
+	for (var i=0; i < this.list_of_button_ids.length; i++)  {
 		var button = document.getElementById(list_of_button_ids[i]);
 		button.onclick = function(){};
 	};
