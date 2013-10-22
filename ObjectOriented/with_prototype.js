@@ -22,6 +22,7 @@ var ShowText = Class.create({
 	//this.callback = callback;
 	this.text = text;
 	this.location_id = location_id;
+	this.name = "ShowText"
   },
   run: function(message) {
 	  console.log('Show Text')
@@ -32,15 +33,19 @@ var ShowText = Class.create({
   }
 });
 
+var response_button_ids = ['resp1', 'resp2'];
 var GetClick = Class.create({
 	initialize: function(response_button_ids) {
 		window['response'] = undefined;
 		//this.callback = callback;
 		this.response_button_ids = response_button_ids;
+		this.name = "GetClick"
 	},
 	run: function() {
 		console.log('Get Click')
+		//console.log(this.name)
 		window['response_callback'] = this.callback.run.bind(this.callback);
+		window['response_button_ids'] = response_button_ids
 		for (var i=0; i < this.response_button_ids.length; i++)  {
 			var button = document.getElementById(this.response_button_ids[i]);
 			button.onclick = function(){
@@ -62,7 +67,8 @@ var GetKey = Class.create({
 		window['response'] = undefined;
 		//this.callback = callback;
 		//window['response_callback'] = this.callback.run;
-		this.response_button_ids = response_button_ids;
+		//this.response_button_ids = response_button_ids;
+		this.name = "GetKey"
 		
 	},
 	run: function(){
@@ -98,6 +104,7 @@ var Logger = Class.create({
 	initialize: function(variables_to_log){
 		this.variables_to_log = variables_to_log;
 		window['variables_to_log'] = variables_to_log;
+		this.name = "Logger";
 	},
 	create_form: function(){
 		console.trace()
@@ -130,6 +137,7 @@ var Logger = Class.create({
 			var log_to = document.getElementById(this_variable+'_form');
 			log_to.value = window[this_variable];	
 		};
+		this.callback.run();
 	}
 });
 
@@ -146,15 +154,53 @@ var Sequence = Class.create({
 			this.items[i].callback = this.items[i+1];
 			this.items[i].callback.run.bind(this.items[i].callback);	
 		};
-		this.items[this.items.length-1].callback = this.end_sequence();
+		this.items[this.items.length-1].callback = this.end_sequence;
 	},
 	end_sequence: function(){
-		alert('End of Sequence')
+		// I don't do anything for now, but I have a method, .run(),
+		// defined below.
 	},
 	run: function(){
 		this.items[0].run()
 	}
 });
+
+Sequence.prototype.end_sequence.run = function(){
+	alert('End of Sequence')
+};
+
+var Loop = Class.create({
+	initialize: function(){
+		this.cycles = 3;
+		this.item // a sequence
+		this.order = "random";
+		this.variables = {} // A dict of lists.
+		//this.variable_names = []
+		this.iteration = 0;
+	},
+	prepare: function(){
+		this.running_order = generate_random_list(this.cycles);
+		//for(var k in this.variables) this.variable_names.push(k);
+	},
+	run: function(){
+		this.cycle = this.running_order[this.iteration];
+		this.iteration ++;
+		for(var var_name in this.variables){
+			window[var_name] = this.variables[var_name][this.cycle]
+		};
+		for(var var_name in this.variables){
+			console.log(window[var_name])
+		};
+	}
+});
+
+loop = new Loop();
+loop.variables = {
+	'probe' : ['One', 'Two', 'Three'],
+	'color' : ['red', 'green', 'blue']
+};
+	
+	
 var ConsoleLog = Class.create({
 	initialize: function(items){
 	},
@@ -162,34 +208,34 @@ var ConsoleLog = Class.create({
 		var message  = window['message'];
 		console.log(message);
 	}
-});	
+});
 
-text = new ShowText('Click a response!', 'probe_text');
+
+
+
 text2 = new ShowText('Use your keyboard!', 'probe_text');
 key = new GetKey('abc');
-click = new GetClick(response_button_ids);
-logger = new Logger(['response', 'response_time']);
+
+
+text = new ShowText();
+text.text = 'Click a response!';
+text.location_id = 'probe_text'
+click = new GetClick();
+click.response_button_ids = ['resp1', 'resp2'];
+logger = new Logger();
+logger.variables_to_log = ['response', 'response_time'];
 seq = new Sequence();
 seq.add_item(text);
 seq.add_item(click);
 seq.add_item(logger);
 seq.set_callbacks();
 
-// Set Callbacks
-//~ text.callback = click;
-//~ key.callback = logger;
-//~ text2.callback = key;
-//~ click.callback = logger;
+
 var start_response_interval
 var response
 var response_time
 var response_callback
 
-var response_button_ids = ['resp1', 'resp2'];
-var log_response = function(){
-	out = 'Response: '+window['response']+'\nRT: '+window['response_time'];
-	alert(out);
-};
 
 
 
