@@ -14,12 +14,12 @@ var Loop = Class.create({
 	},
 	run: function(){
 		console.log("Iter: " + this.iteration);
-		var cycle = this.running_order[this.iteration];
+		this.cycle = this.running_order[this.iteration];
 		this.iteration++;
-		console.log("Cycle: " + cycle);
+		console.log("Cycle: " + this.cycle);
 		for(var var_name in this.variables){
-			window[var_name] = this.variables[var_name][cycle]
-			console.log("Value of variable " + var_name + " set to " + this.variables[var_name][cycle])
+			window[var_name] = this.variables[var_name][this.cycle]
+			console.log("Value of variable " + var_name + " set to " + this.variables[var_name][this.cycle])
 		};
 		for(var var_name in this.variables){
 			console.log(window[var_name])
