@@ -96,9 +96,12 @@ key = new GetKey('abc');
 
 text = new ShowText();
 text.text = '[probe]';
-text.location_id = 'probe_text'
+text.location_id = 'probe_text';
+text.color = '[color]';
+
 click = new GetClick();
 click.response_button_ids = ['resp1', 'resp2'];
+
 logger = new Logger();
 logger.variables_to_log = ['response', 'response_time', 'probe', 'loop.cycle', 'loop.iteration'];
 seq = new Sequence();

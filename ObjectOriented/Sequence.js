@@ -1,3 +1,7 @@
+/*
+ * TODO: Return to another iteration of the loop after the last item
+ */
+  
 var Sequence = Class.create({
 	initialize: function(){
 		this.items = new Array();
@@ -7,11 +11,13 @@ var Sequence = Class.create({
 		this.items.push(item)
 	},
 	set_callbacks: function(){
+		console.log('Setting Callbacks')
 		for(var i = 0; i < this.items.length-1; i++){
 			this.items[i].callback = this.items[i+1];
 			this.items[i].callback.run.bind(this.items[i].callback);	
 		};
-		this.items[this.items.length-1].callback = this.callback;
+		this.items[this.items.length-1].callback = end_of_sequence
+//		this.items[this.items.length-1].callback.prepare = function(){}//this.callback;
 		//~ this.items[this.items.length-1].callback.bind(this.callback);
 		//~ this.items[this.items.length-1].callback.run.bind(this);
 		//this.items[this.items.length-1].callback.bind(this);
@@ -38,16 +44,38 @@ var Sequence = Class.create({
 		this.items[0].run()
 	}
 });
+//~ 
+//~ Sequence.prototype.end_sequence.prepare = function() {
+		//~ // Now that everything's prepared, run the sequence
+		//~ console.log('Sequence Prepared')
+//~ };
+//~ Sequence.prototype.end_sequence.run = function(){
+	//~ // I need to be bound to the Sequence itself, not to 'end_sequence'
+	//~ console.log('End of Sequence')
+	//~ console.log(this)
+	//~ console.log(this.this)
+	//~ console.log(this.that)
+	//~ console.log(this.name);//.that.name);
+//~ };
 
-Sequence.prototype.end_sequence.prepare = function() {
+var End_Sequence = Class.create({
+	initialize: function(){
+	},
+	prepare: function() {
+		console.log('Preparing' + this.name)
+		// Do I need to do anything here?
+		this.set_callbacks();
+		this.items[0].prepare();
+	}
+});
+
+End_Sequence.prototype.prepare = function() {
 		// Now that everything's prepared, run the sequence
 		console.log('Sequence Prepared')
 };
-Sequence.prototype.end_sequence.run = function(){
+End_Sequence.prototype.run = function(){
 	// I need to be bound to the Sequence itself, not to 'end_sequence'
 	console.log('End of Sequence')
-	console.log(this)
-	console.log(this.this)
-	console.log(this.that)
-	console.log(this.name);//.that.name);
 };
+
+var end_of_sequence = new End_Sequence();
