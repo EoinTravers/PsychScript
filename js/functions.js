@@ -96,6 +96,10 @@ function get_keyboard_response(keys_to_accept) {
     };
 };
 
+function deactivate_keyboard_response(){
+	document.onkeydown = function(){}
+};
+
 function activate_response_buttons(list_of_button_ids) {
     for (var i=0; i < list_of_button_ids.length; i++)  {
 	var button = document.getElementById(list_of_button_ids[i]);

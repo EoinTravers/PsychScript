@@ -32,6 +32,7 @@ if(debug_mode){
 };
 
 function trial_stage0() {
+	deactivate_keyboard_response();
     stimuli_number = random_order[trial_number];
     probe = probes[stimuli_number];
     code = codes[stimuli_number];
