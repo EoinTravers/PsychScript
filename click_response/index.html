@@ -7,19 +7,26 @@
 		<link rel="stylesheet" type="text/css" href="../style.css">
 	</head>
 	<body align = "center">
-
+<!-- TODO - CSS should be in seperate file. -->
 		<h2>Study title</h2>
-		<!-- This section is where all the stimuli will be presented during the experiment. -->
+		<!-- This section is where all the stimuli will be presented during the experiment.
+			In other words, this is where the action happens. -->
 		<div id='experiment' align = "center" ;
 		style="display: None; margin-right:100px; margin-left:100px; margin-top:100px;">
 			<p id = 'textAboveProbe'>Is this a word?</p>
 			<div id = 'probeHolder' style="width:60%;  min-height:100px; padding-top:100px; padding-bottom:100px; border: 2px solid">
-				<p id = 'probeText' style="font-size:30px; font-weight:bold;">Hello</p> <!--This doesn't behave as it should for long text-->
+				<p id = 'probeText' style="font-size:30px; font-weight:bold;">
+					<!-- Arguments passed to `show_text()` will show up here,
+						or wherever the id "probeText" is used.-->
+				</p>
 			</div>
 			<p id = 'textBelowProbe'>
-
+				<!-- This area can be used for other text-->
 			</p>
 			<p id = 'responseButtons'>
+				<!--The response buttons.
+					You can have as many buttons as you like here, but you might need to
+					change the style to make them all fit.-->
 				<button id="yesButton" class = "bigButton">Yes</button>
 				<button id="noButton" class = "bigButton">No</button>
 			</p>
@@ -35,10 +42,15 @@
 			</p>
 			<p>
 				<button onclick="begin_experiment();">Begin</button>
+				<!--Clicking the button executes `begin_experiment()`, which:
+					- Hides the "instructions" <div>
+					- Shows the "experiment" <div>
+					- Calls `trial_stage0()` for the first time.
+					-->
 			</p>		
 		</div>
 		
-		<!-- This section appears after the last trial. -->
+		<!-- This section appears after the last trial, when `end_experiment()` is called. -->
 		<div id="debrief" align = "center" ;
 		style="display:None; margin-right:100px; margin-left:100px; margin-top:100px;">
 			<p>
@@ -64,18 +76,12 @@
 		and, when it comes to creating your database, using 
 		 -->
 			<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
-				Paradigm: <input id = "paradigmBox"    name = "paradigm"><br>
-				Timestamp: <input id = "timeBox"    name = "timestamp"><br>
-				Subject: <input id = "subjectBox"    name = "subject"><br>
-				Trial <input id = "trialBox"    name = "trial"><br>
-				Stimuli <input id = "stimuliBox"    name = "trial"><br>
-				Probe<input id = "probeBox"    name = "probe"><br>
-				Code<input id = "codeBox"    name = "code"><br>
-				Response<input id = "responseBox"    name = "response"><br>
-				rt<input id = "rtBox"    name = "rt"><br><!--Shown response data-->
+				<!--This starts empty, but will be filled with (invisible) text boxes
+					as soon as `begin_experiment()` is called.-->
 			</form>
 			<button onclick=" document.getElementById('hidden_div').style.display = 'None';">Hide</button>
 		</div>
+		<!-- Import JavaScript scripts. -->
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="../js/functions.js"></script>
 		<script src="../js/stimuli.js"></script>

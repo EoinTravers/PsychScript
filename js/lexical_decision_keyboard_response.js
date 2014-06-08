@@ -37,7 +37,7 @@ function trial_stage0() {
     probe = probes[stimuli_number];
     code = codes[stimuli_number];
     show_fixation(ITI);
-    setTimeout("trial_stage1()", ITI);
+    setTimeout(function(){trial_stage1()}, ITI);
 };
 
 function trial_stage1() {

@@ -61,12 +61,12 @@ function show_fixation(duration, flash) {
     flash = flash || false
     if (flash) {
     	var pause = duration / 3
-	show_text('')
-	setTimeout("show_text('+');", pause)
-	setTimeout("show_text('');", pause*2)
+		show_text('')
+		setTimeout(function(){show_text('+')}, pause)
+		setTimeout(function(){show_text('')}, pause*2)
     }
     else {
-	show_text('+');
+		show_text('+');
     };
 };
 
@@ -121,9 +121,10 @@ function deactivate_response_buttons(list_of_button_ids) {
 
 // Experiment logic
 function begin_experiment() {
+	create_logging_form("responseForm", variables_to_log)
 	document.getElementById('instructions').style.display = "None";
 	document.getElementById('experiment').style.display = "Inline";
-	trial_stage0(trial_number)
+	trial_stage0()
 };
 
 function end_experiment() {
