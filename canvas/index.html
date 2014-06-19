@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <title>Reasoning about the Natural World</title>
+	    <link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<!--<body onload = "setTimeout(function(){start_trial(trial);}, 5)" oncontextmenu="clear_timers(); return false;"> -->
+	<body onload = "setTimeout(function(){start_trial(trial);}, 5)">
+	    <p align = "center" class = "top_text">Press F11 to quit</p>
+	    <div align = "center">
+		<canvas align = "center" id="canvas1" style="border: 1px solid black;" oncontextmenu="return false;">
+		It looks like your browser doesn't support this feature, sorry!
+		</canvas>  
+	    </div>
+	    
+
+	    <!--<button onclick="start();">Start screen</button>
+	    <button onclick = "trial_stage0();">Start/Next trial</button>-->
+	    <span align = "center" style = "font-size:30px;font-weight:bold;">
+	    </span>
+	    <div id="endText" align = "center"  style = "font-size:30px;display: none;">
+		<p>
+		    Great! You've finished the main part of the experiment.<br>
+		    There's one more section to go.<br>
+		</p>
+		<p>
+			<a href = "../part2/index.html">Click here to go on.</a>
+		</p>
+	    </div>
+		
+	    <div id="debugDiv" style = "Display:None">
+	    <!-- Some hidden input boxes, for data to be written to, and sent at the end of the experiment.-->
+		<form id = "responseForm" name ="Output" method ="POST" action ="save_data.php">
+		    Timestamp: <input id = "timeBox"    name = "timeOut"><br>
+		    Subject:  <input id = "subjectBox"    name = "subjectOut"><br>
+		    SONA:  <input id = "sonaBox"    name = "sonaOut"><br>		    
+		    Trial <input id = "trialBox"    name = "trialOut"><br>
+		    Stimuli<input id = "stimuliBox"    name = "stimuliOut">(identity of target, responses, and their relationhships can be inferred from this).<br>
+		    Resp<input id = "respBox"    name = "respOut"><br>
+		    Response<input id = "responseBox"    name = "responseOut"><br>
+		    rt<input id = "rtBox"    name = "rtOut"><br>
+		    canvas width<input id = "widthBox"    name = "widthOut"><br>
+		    canvas height<input id = "heightBox"    name = "heightOut"><br>
+		    x trajectory<input id = "xBox"    name = "xOut"><br>
+		    y trajectory<input id = "yBox"    name = "yOut"><br>
+		    timepoints<input id = "tBox"    name = "tOut"><br>
+		</form>	
+	</div>
+	</body>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/stimuli.js"></script>
+<script src="js/main.js"></script>
+</html>

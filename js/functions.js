@@ -35,6 +35,7 @@ var prime;
 var probe;
 var accepted_keys;
 var feedback_delay;
+var body = document.getElementsByTagName('body')[0];
 
 // Functions
 // Visuals
@@ -241,3 +242,14 @@ function preload_images(image_names, directory) {
 	return image_array;
 };
 
+function toggle_debug() {
+	var hidden = document.getElementById('debug_info');
+	if(debug){
+		hidden.style.display = 'none';
+		debug = false;
+	}
+	else{
+		hidden.style.display = 'block';
+		debug = true;
+	};
+};
