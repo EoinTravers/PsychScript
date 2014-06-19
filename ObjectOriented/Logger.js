@@ -25,8 +25,7 @@ var Logger = Class.create({
 	prepare: function() {
 		console.log('Preparing' + this.name)
 		// Do I need to do anything here?
-		this.callback.prepare.bind(this.callback); // bind 'this' to GetClick,
-		// rather than inheriting from ShowText, as is the default.
+		this.callback.prepare.bind(this.callback);
 		this.callback.prepare();
 	},
 	run: function(){
@@ -40,7 +39,7 @@ var Logger = Class.create({
 		for(var i = 0; i < vars.length; i++){
 			var this_variable = vars[i];
 			var log_to = document.getElementById(this_variable+'_form');
-			log_to.value = window[this_variable];	
+			log_to.value = global_var_from_string(this_variable);	
 		};
 		this.callback.run();
 	}
