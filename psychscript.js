@@ -164,8 +164,9 @@ function log_response() {
     };
     console.log('Logging response: '+ response)
     for (var i=0; i < variables_to_log.length; i++) {
-	var logging_box_id = logging_box_ids[i];
 	var variable_to_log = variables_to_log[i];
+	var logging_box_id = variable_to_log + 'Box';
+	console.log(logging_box_id)
 	document.getElementById(logging_box_id).value = window[variable_to_log]
     };
     sendData(data_address);

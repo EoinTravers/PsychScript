@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Keyboard Response</title>
+		<title>Click Response</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
 	</head>
 	<body align = "center">
@@ -20,9 +20,14 @@
 				</p>
 			</div>
 			<p id = 'textBelowProbe'>
-				Buttons:<br>
-				Y : Is a word<br>
-				N : Not a word.
+				<!-- This area can be used for other text-->
+			</p>
+			<p id = 'responseButtons'>
+				<!--The response buttons.
+					You can have as many buttons as you like here, but you might need to
+					change the style to make them all fit.-->
+				<button id="yesButton" class = "bigButton">Yes</button>
+				<button id="noButton" class = "bigButton">No</button>
 			</p>
 		</div>
 		
@@ -44,7 +49,7 @@
 			</p>		
 		</div>
 		
-		<!-- This section appears after the last trial. -->
+		<!-- This section appears after the last trial, when `end_experiment()` is called. -->
 		<div id="debrief" align = "center" ;
 		style="display:None; margin-right:100px; margin-left:100px; margin-top:100px;">
 			<p>
@@ -64,7 +69,7 @@
 		will be written to this box after each trial, and then submitted
 		to the server to record.
 		 -->
-		 	<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
+			<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
 				<!--This starts empty, but will be filled with (invisible) text boxes
 					as soon as `begin_experiment()` is called.-->
 			</form>
@@ -78,9 +83,9 @@
 		In your experiments, you'll probably want to include all the necessary
 		files in the directory below the current one, and change the paths below
 		from '../../' to 'js/' as appropriate.  -->
-		<script src="../../psychscript.js"></script>
+		<script src="../psychscript.js"></script>
 		<script src="js/stimuli.js"></script>
-		<script src="js/lexical_decision_keyboard_response.js"></script>
+		<script src="js/lexical_decision_clickbutton_response.js"></script>
 	</body>
 
 </html>

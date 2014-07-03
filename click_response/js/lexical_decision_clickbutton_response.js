@@ -10,16 +10,17 @@ var ITI = 500 // Inter Trial Interval - Duration of fixation cross
 var number_of_trials = 40
 
 /*
- * These two lists handle data logging:
- * The first a list of variables to be logged after each trial.
- * The second is a list of HTML ids for the 'invisible' text boxes used to log them.
- * 
- * After each trial, the value of each variable gets written to it's respective box,
- * and the whole thing is sent to the server as a form.
+ * This list handles data logging, and defines 
+ * the variables to be logged after each trial.
+ * At the start of the experiment, a hidden form 
+ * is generated, with a text box for each of these variables,
+ * id'd 'variablenameBox'.
+ * After each trial, the value of each variable is written
+ * inside it's respective text box, and the whole form
+ * is submitted to the server for logging.
  */
 var variables_to_log = new Array('paradigm', 'experiment_start_time', 'subject_nr', 'trial_number', 'stimuli_number', 'probe', 'code', 'response', 'rt');
-var logging_box_ids = new Array('paradigmBox', 'timeBox', 'subjectBox', 'trialBox', 'stimuliBox', 'probeBox', 'codeBox', 'responseBox', 'rtBox');
-var data_address = '../save_data.php' // URL to send results to.
+var data_address = 'save_data.php' // URL to send results to.
 
 /*
  * Define the variables themselves.

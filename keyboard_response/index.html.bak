@@ -78,7 +78,7 @@
 		In your experiments, you'll probably want to include all the necessary
 		files in the directory below the current one, and change the paths below
 		from '../../' to 'js/' as appropriate.  -->
-		<script src="../../psychscript.js"></script>
+		<script src="../psychscript.js"></script>
 		<script src="js/stimuli.js"></script>
 		<script src="js/lexical_decision_keyboard_response.js"></script>
 	</body>

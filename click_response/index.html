@@ -3,11 +3,10 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Mouse tracking template</title>
+		<title>Click Response</title>
 		<link rel="stylesheet" type="text/css" href="../style.css">
 	</head>
 	<body align = "center">
-<!-- TODO - CSS should be in seperate file. -->
 		<h2>Study title</h2>
 		<!-- This section is where all the stimuli will be presented during the experiment.
 			In other words, this is where the action happens. -->
@@ -63,17 +62,12 @@
 		<div id="hidden_div" style = "Display: Inline;">
 		<!-- 
 		Nothing within this section will be visable to participants.
-		Note the 'id' and 'name' values for each <input> below.
-		In your JavaScript file, you will need to include a  list of these ids, along with
-		a list of the corresponding variable for each;
-		i.e. 
-			var logging_box_ids = [Date(), trial_number, probe, code, response, rt]
-			var variables_to_log = ['timeBox', 'trialBox', 'probeBox', 'codeBox', 
-						'responseBox', 'rtBox']
-						
-		The 'name' value is the name this variable gets sent to the server as.
-		It is recomended that you use the same names as used for the variables in the experiment itself,
-		and, when it comes to creating your database, using 
+		In your JavaScript file, you will need to include a  list of variables to
+		log after each trial.
+		The form below, which begins as empty, will be populated by
+		one text box for each variable, and the value of each variable
+		will be written to this box after each trial, and then submitted
+		to the server to record.
 		 -->
 			<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
 				<!--This starts empty, but will be filled with (invisible) text boxes
@@ -83,9 +77,15 @@
 		</div>
 		<!-- Import JavaScript scripts. -->
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="../js/functions.js"></script>
-		<script src="../js/stimuli.js"></script>
-		<script src="../js/lexical_decision_clickbutton_response.js"></script>
+		<!-- The next scripts is stored in the root directory of your copy of PsychScript,
+		rather than the one specific to this template, where the final two are,
+		so that they can be shared among all template files.
+		In your experiments, you'll probably want to include all the necessary
+		files in the directory below the current one, and change the paths below
+		from '../../' to 'js/' as appropriate.  -->
+		<script src="../../psychscript.js"></script>
+		<script src="js/stimuli.js"></script>
+		<script src="js/lexical_decision_clickbutton_response.js"></script>
 	</body>
 
 </html>
