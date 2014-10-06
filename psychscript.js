@@ -58,6 +58,32 @@ function show_element(id){
     //Should this be inline?
 }
 
+// Or, more concisely
+function hide(id){
+	// Takes id, or list of ids
+	if (id instanceof Array){
+		for(var i=0; i<id.length; i++){
+			document.getElementById(id[i]).style.display = 'None';
+		}
+	}
+	else{
+		document.getElementById(id).style.display = 'None';
+	}
+};
+
+function show(id){
+	// Takes id, or list of ids
+	if (id instanceof Array){
+		for(var i=0; i<id.length; i++){
+			document.getElementById(id[i]).style.display = 'Block'; // Or 'inline'?
+		}
+	}
+	else{
+		document.getElementById(id).style.display = 'Block';
+	}
+};
+
+// / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / //
 function show_text(text) {
     document.getElementById('probeText').innerHTML = text;
 };
@@ -67,7 +93,6 @@ function show_above(text) {
 function show_below(text) {
     document.getElementById('textBelowProbe').innerHTML = text;
 };
-
 
 function show_image(locationID, src) {
     var this_image = document.getElementById(locationID)
@@ -80,6 +105,19 @@ function hide_images(){
     document.getElementById('img2').style.display = 'None';
     document.getElementById('img3').style.display = 'None';
 };
+
+
+// A more flexible implementation of the above:
+function set_text(id, text){
+	 document.getElementById(id).innerHTML = text;
+};
+
+function set_image(id, src){
+	document.getElementById(id).src = src
+}
+
+
+
 function show_fixation(duration, flash, id) {
     /*Shows a fixation cross in element `id` for the given duration.
      * Dy default, shows for the whole duration, but can optionally
@@ -107,6 +145,7 @@ function get_keyboard_response(keys_to_accept) {
      * expected (if any are supplied, otherwise it will accept any key),
      * and log that key as the response.
      */
+     // TODO: Handle timeouts
     accepted_keys = keys_to_accept
     document.onkeydown = function(event) {
 	var key = String.fromCharCode(event.keyCode)
@@ -153,8 +192,8 @@ function activate_response_buttons(list_of_button_ids) {
 function deactivate_response_buttons(list_of_button_ids) {
     // Does what it says.
     for (var i=0; i < list_of_button_ids.length; i++)  {
-	var button_id = list_of_button_ids[i]
-	document.getElementById(button_id).onclick = function(){};
+		var button_id = list_of_button_ids[i]
+		document.getElementById(button_id).onclick = function(){};
     };
 };
 
@@ -162,15 +201,15 @@ function deactivate_response_buttons(list_of_button_ids) {
 function begin_experiment() {
     // Users can of course override these functions, but these are
     // useful defaults.
-    create_logging_form(variables_to_log); // See function below   
-    document.getElementById('instructions').style.display = "None"; // Hide instructions
-    document.getElementById('experiment').style.display = "Inline"; // Show exp. body.
-    trial_stage0() // Run first trial.
+    create_logging_form(variables_to_log); // See function below
+    hide('instructions');
+    show('experiment');
+    setTimeout(function(){trial_stage0()}, 1000) // Run first trial, after 1 second.
 };
 
 function end_experiment() {
-	document.getElementById('experiment').style.display = "None";
-	document.getElementById('debrief').style.display = "Inline";
+	hide('experiment');
+	show('debrief');
 };
 
 
@@ -208,23 +247,23 @@ function log_response() {
     try {clearTimeout(response_timeout);} catch(err){};
     feedback_delay = 0 // Leave at 0 until implemented
     if(error_feedback) {
-	// Not fully implemented yet
-	var correct = check_accuracy()
-	console.log(correct)
-	if (!correct) {
-	    give_feedback()
-	};
+		// Not fully implemented yet
+		var correct = check_accuracy()
+		console.log(correct)
+		if (!correct) {
+			give_feedback()
+		};
     };
     console.log('Logging response: '+ response)
     for (var i=0; i < variables_to_log.length; i++) {
-	// Loop through `variables_to_log`, and write each
-	// variable to the approriate text box.
-	var variable_to_log = variables_to_log[i];
-	var logging_box_id = variable_to_log + 'Box';
-	console.log(logging_box_id)
-	document.getElementById(logging_box_id).value = window[variable_to_log]
-	// `window['variable'] is the only way I know of using a string of
-	// a variables name in place of the actual variable.
+		// Loop through `variables_to_log`, and write each
+		// variable to the approriate text box.
+		var variable_to_log = variables_to_log[i];
+		var logging_box_id = variable_to_log + 'Box';
+		console.log(logging_box_id)
+		document.getElementById(logging_box_id).value = window[variable_to_log]
+		// `window['variable'] is the only way I know of using a string of
+		// a variables name in place of the actual variable.
     };
     sendData(data_address);
     setTimeout(function(){next_trial();}, feedback_delay)
@@ -237,11 +276,11 @@ function next_trial(){
     // Bad things will happen if neither variable is defined.
     // `trial_number` is a built-in variable - no other label should be used.
     if (trial_number < number_of_trials) {
-	trial_number++ 
-	trial_stage0()
+		trial_number++ 
+		trial_stage0()
     }
     else {
-	end_experiment();
+		end_experiment();
     };
 };
 
@@ -333,5 +372,3 @@ function preload_images(image_names, directory) {
     };
     return image_array;
 };
-
-
