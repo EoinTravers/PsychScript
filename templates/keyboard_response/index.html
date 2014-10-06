@@ -4,17 +4,16 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Keyboard Response</title>
-		<link rel="stylesheet" type="text/css" href="../style.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body align = "center">
 		<h2>Study title</h2>
 		<!-- This section is where all the stimuli will be presented during the experiment.
 			In other words, this is where the action happens. -->
-		<div id='experiment' align = "center" ;
-		style="display: None; margin-right:100px; margin-left:100px; margin-top:100px;">
+		<div id='experiment'>
 			<p id = 'textAboveProbe'>Is this a word?</p>
-			<div id = 'probeHolder' style="width:60%;  min-height:100px; padding-top:100px; padding-bottom:100px; border: 2px solid">
-				<p id = 'probeText' style="font-size:30px; font-weight:bold;">
+			<div id = 'probeHolder'>
+				<p id = 'probeText'>
 					<!-- Arguments passed to `show_text()` will show up here,
 						or wherever the id "probeText" is used.-->
 				</p>
@@ -27,8 +26,7 @@
 		</div>
 		
 		<!-- Instructions here are shown prior to begining the experiment. -->
-		<div id="instructions" align = "center" ;
-		style="display:Inline; margin-right:100px; margin-left:100px; margin-top:100px;">
+		<div id="instructions">
 			<p>
 				Use this space to write instructions.<br>
 				You can use any HTML formatting you like in here.<br>
@@ -45,8 +43,7 @@
 		</div>
 		
 		<!-- This section appears after the last trial. -->
-		<div id="debrief" align = "center" ;
-		style="display:None; margin-right:100px; margin-left:100px; margin-top:100px;">
+		<div id="debrief">
 			<p>
 				This section will appear once the experiment is finished.<br>
 				Use it to explain what your study was about, or post a link

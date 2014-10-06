@@ -58,7 +58,7 @@ if(debug_mode){
 	// text boxes where the variables are written to before sending to the
 	// server.
 	// Useful for developing.
-    document.getElementById('hidden_div').style.display = 'Inline'
+    show('hidden_div')
 };
 
 function trial_stage0() {
@@ -82,7 +82,8 @@ function trial_stage0() {
 
 function trial_stage1() {
     start_time = (Date.now()); // Start a timer
-    show_text(probe); // Show the probe text
+    set_text('probeText', probe);
+    show('probeText'); // Show the probe text
     /* "Turn on" the response buttons.
      * From here, clicking either button specified below will execute
      * `log_response`, with the value of the button.*/
