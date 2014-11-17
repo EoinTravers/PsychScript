@@ -37,24 +37,29 @@ var response = get_keyboard_response('abc');
 ```
 A definite improvement!
 
+Similarly,
+
+```javascript
+var divs_to_hide = ['probe_text', 'probe_image', 'feedback_text']
+for(var i=0; i<divs_to_hide.length; i++){
+    document.getElementById(divs_to_hide[i]).style.display = "none";
+};
+```
+
+becomes
+```javascript
+hide(['probe_text', 'probe_image', 'feedback_text'])
+```
+
+You should get the idea by now.
 
 ---------------------
 
 ###Demos
-To see some of PsychScript in action, check out the following demos:
+To see some of PsychScript in action, check out these demos:
  - [Keyboard Response](http://www3.qub.ac.uk/researchingreasoning/psychscript/keyboard_response/)
  - [Click Response](http://www3.qub.ac.uk/researchingreasoning/psychscript/click_response/)
- - [Mouse-tracking](http://www3.qub.ac.uk/researchingreasoning/psychscript/mouse_tracking/)
 
-
----------------------
-
-###Progress
-
-Please note that this project is in development, and is **not yet ready for use**.
-
-However, there are a number of templates which are fully functional, specifically versions of the classic lexical decision task, using either keyboard responses, onscreen buttons, or (in Beta) mouse-tracking.
-There will be online demos of these features available in the near future.
 
 ---------------------
 
@@ -66,8 +71,3 @@ The immediate problems to be solved include:
  - Making it easier to create HTML as required by the experimenter (hopefully using existing open tools).
  - Testing and benchmarking, especially with regard to timing accuracy.
  - Creating templates for more common paradigms.
-
-Looking further ahead, it might be nice someday to include the following:
- - A GUI for building experiments (like [OpenSesame](http://osdoc.cogsci.nl) or EPrime)
- - Mobile support
- - A [Behavior Research Methods](http://www.springer.com/psychology/cognitive+psychology/journal/13428) paper?
