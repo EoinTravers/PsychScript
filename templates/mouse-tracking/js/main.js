@@ -1,7 +1,10 @@
+
+//~ This template is NOT ready for use. Please be patient...
+
 // Experiment stuff
 // Parameters
 $( window ).load(function() {
-	trial_stage0();
+	begin_experiment();
 	});
 
 var sample_rate = 10;
@@ -16,9 +19,10 @@ var timeout_msg = "Oh no! You ran out of time!\n\nPlease try to answer more quic
 var number_of_trials = probes.length
 var data_address = 'save_data.php'
 
-var error_feedback = true
+var error_feedback = false
 // If using error_feedback, you need to define the possible codes, and 
 // the correct response for each.
+// This doesn't currently work.
 var error_pause = 700;
 
 
@@ -43,12 +47,7 @@ var variables_to_log = new Array(
 	'experiment_start_time', 'subject_nr', 'probe', 'code', 'response', 'rt', 
 	'xList', 'yList', 'tList', 'trial_number', 'stimuli_number', 'w', 'h'
 	);
-// The HTML IDs of the text boxes where each variable will be recorded. (see #DOCUMENTATION#)
-// These MUST be in the same order as variables_to_log, above.
-var logging_box_ids = new Array(
-	"timeBox", "subjectBox", "probeBox", "codeBox", "responseBox", "rtBox", "xBox",
-	"yBox", "tBox", "trialBox", "stimuliBox", "widthBox", "heightBox"
-	);
+
 
 
 //  Canvas settings
@@ -108,6 +107,12 @@ var button = new Button('images/next.png');
 // (activate their 'action').
 var clickables = new Array(resp1, resp2, button);
 
+function begin_experiment() {
+    // Users can of course override these functions, but these are
+    // useful defaults.
+    create_logging_form(variables_to_log); // See function below   
+    trial_stage0() // Run first trial.
+};
 
 
 // Trial logic

@@ -3,31 +3,38 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Mouse tracking template</title>
+		<title>Click Response</title>
+<!--
 		<link rel="stylesheet" type="text/css" href="../style.css">
+-->
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
-	<body align = "center">
-
+	<body>
 		<h2>Study title</h2>
-		<!-- This section is where all the stimuli will be presented during the experiment. -->
-		<div id='experiment' align = "center" ;
-		style="display: None; margin-right:100px; margin-left:100px; margin-top:100px;">
+		<!-- This section is where all the stimuli will be presented during the experiment.
+			In other words, this is where the action happens. -->
+		<div id='experiment'>
 			<p id = 'textAboveProbe'>Is this a word?</p>
-			<div id = 'probeHolder' style="width:60%;  min-height:100px; padding-top:100px; padding-bottom:100px; border: 2px solid">
-				<p id = 'probeText' style="font-size:30px; font-weight:bold;">Hello</p> <!--This doesn't behave as it should for long text-->
+			<div id = 'probeHolder'>
+				<p id = 'probeText'>
+					<!-- Arguments passed to `show_text()` will show up here,
+						or wherever the id "probeText" is used.-->
+				</p>
 			</div>
 			<p id = 'textBelowProbe'>
-
+				<!-- This area can be used for other text-->
 			</p>
 			<p id = 'responseButtons'>
+				<!--The response buttons.
+					You can have as many buttons as you like here, but you might need to
+					change the style to make them all fit.-->
 				<button id="yesButton" class = "bigButton">Yes</button>
-				<button id="noButton" class = "bigButton">No</button>
+				<button id="noButton"  class = "bigButton">No</button>
 			</p>
 		</div>
 		
 		<!-- Instructions here are shown prior to begining the experiment. -->
-		<div id="instructions" align = "center" ;
-		style="display:Inline; margin-right:100px; margin-left:100px; margin-top:100px;">
+		<div id="instructions">
 			<p>
 				Use this space to write instructions.<br>
 				You can use any HTML formatting you like in here.<br>
@@ -35,10 +42,15 @@
 			</p>
 			<p>
 				<button onclick="begin_experiment();">Begin</button>
+				<!--Clicking the button executes `begin_experiment()`, which:
+					- Hides the "instructions" <div>
+					- Shows the "experiment" <div>
+					- Calls `trial_stage0()` for the first time.
+					-->
 			</p>		
 		</div>
 		
-		<!-- This section appears after the last trial. -->
+		<!-- This section appears after the last trial, when `end_experiment()` is called. -->
 		<div id="debrief" align = "center" ;
 		style="display:None; margin-right:100px; margin-left:100px; margin-top:100px;">
 			<p>
@@ -51,35 +63,30 @@
 		<div id="hidden_div" style = "Display: Inline;">
 		<!-- 
 		Nothing within this section will be visable to participants.
-		Note the 'id' and 'name' values for each <input> below.
-		In your JavaScript file, you will need to include a  list of these ids, along with
-		a list of the corresponding variable for each;
-		i.e. 
-			var logging_box_ids = [Date(), trial_number, probe, code, response, rt]
-			var variables_to_log = ['timeBox', 'trialBox', 'probeBox', 'codeBox', 
-						'responseBox', 'rtBox']
-						
-		The 'name' value is the name this variable gets sent to the server as.
-		It is recomended that you use the same names as used for the variables in the experiment itself,
-		and, when it comes to creating your database, using 
+		In your JavaScript file, you will need to include a  list of variables to
+		log after each trial.
+		The form below, which begins as empty, will be populated by
+		one text box for each variable, and the value of each variable
+		will be written to this box after each trial, and then submitted
+		to the server to record.
 		 -->
 			<form id = "responseForm" style="display:inline;" name ="Output" method ="POST" action ="save_data.php">
-				Paradigm: <input id = "paradigmBox"    name = "paradigm"><br>
-				Timestamp: <input id = "timeBox"    name = "timestamp"><br>
-				Subject: <input id = "subjectBox"    name = "subject"><br>
-				Trial <input id = "trialBox"    name = "trial"><br>
-				Stimuli <input id = "stimuliBox"    name = "trial"><br>
-				Probe<input id = "probeBox"    name = "probe"><br>
-				Code<input id = "codeBox"    name = "code"><br>
-				Response<input id = "responseBox"    name = "response"><br>
-				rt<input id = "rtBox"    name = "rt"><br><!--Shown response data-->
+				<!--This starts empty, but will be filled with (invisible) text boxes
+					as soon as `begin_experiment()` is called.-->
 			</form>
 			<button onclick=" document.getElementById('hidden_div').style.display = 'None';">Hide</button>
 		</div>
+		<!-- Import JavaScript scripts. -->
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="../js/functions.js"></script>
-		<script src="../js/stimuli.js"></script>
-		<script src="../js/lexical_decision_clickbutton_response.js"></script>
+		<!-- The next scripts is stored in the root directory of your copy of PsychScript,
+		rather than the one specific to this template, where the final two are,
+		so that they can be shared among all template files.
+		In your experiments, you'll probably want to include all the necessary
+		files in the directory below the current one, and change the paths below
+		from '../../' to 'js/' as appropriate.  -->
+		<script src="../../psychscript.js"></script>
+		<script src="js/stimuli.js"></script>
+		<script src="js/lexical_decision_clickbutton_response.js"></script>
 	</body>
 
 </html>

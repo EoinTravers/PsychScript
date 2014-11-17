@@ -56,8 +56,8 @@ Response.prototype.onclick = function(){
 
 // Button image
 var Button = function(img_url) {
-	this.h = h*.05;
-	this.w = this.h * 2;
+	this.h = h*.1;
+	this.w = this.h;
 	this.x = (w*.5)-(this.w*.5); // relative to canvas.width?
 	this.y = h-this.h;
 	this.image = new Image();
@@ -120,26 +120,37 @@ function pass() {
 };
 
 // Mouse handling
-document.onmousemove = function(e){
-    if(e.offsetX) {
-        mx = e.offsetX;
-        my = e.offsetY;
-    }
-    else if(e.layerX) {
-        mx = e.layerX;
-        my = e.layerY;
-    }
-};
+//~ document.onmousemove = function(e){
+    //~ if(e.offsetX) {
+        //~ mx = e.offsetX;
+        //~ my = e.offsetY;
+    //~ }
+    //~ else if(e.layerX) {
+        //~ mx = e.layerX;
+        //~ my = e.layerY;
+    //~ }
+//~ };
+$(document).mousemove(function(e){
+    mx = Math.round(e.pageX - $('canvas').offset().left)
+    my = Math.round(e.pageY- $('canvas').offset().top)
+});
+	
+
 canvas.onmousedown = function(e){
-	if(e.offsetX) {
-        mx = e.offsetX;
-        my = e.offsetY;
-    }
-    else if(e.layerX) {
-        mx = e.layerX;
-        my = e.layerY;
-    }
-    //console.log(String(mx)+' '+String(my))
+	//~ if(e.offsetX) {
+        //~ mx = e.offsetX;
+        //~ my = e.offsetY;
+    //~ }
+    //~ else if(e.layerX) {
+        //~ mx = e.layerX;
+        //~ my = e.layerY;
+    //~ }
+
+    //~ console.log(String(mx)+' '+String(my))
+    //~ ctx.fillStyle="red";
+    //~ ctx.fillRect(mx, my, 5, 5)
+    
+    // Use global mx and my
     for(var i = 0; i < clickables.length; i++){
 		if(clickables[i].contains(mx, my)){
 			clickables[i].onclick()
